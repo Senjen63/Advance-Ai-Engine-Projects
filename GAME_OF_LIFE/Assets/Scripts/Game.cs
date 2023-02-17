@@ -6,6 +6,8 @@ public class Game : MonoBehaviour
 {
     private static int SCREEN_WIDTH = 64;  //1024 pixels
     private static int SCREEN_HEIGHT = 48; //768 pixels
+    public float speed = 0.1f;
+    private float timer = 0;
 
     Cell[,] grid = new Cell[SCREEN_WIDTH, SCREEN_HEIGHT];
 
@@ -19,7 +21,19 @@ public class Game : MonoBehaviour
     
     void Update()
     {
-        CountNeighbors();
+        if(timer >=speed)
+        {
+            timer = 0;
+
+            CountNeighbors();
+            PopulationControl();
+        }
+
+        else
+        {
+            timer += Time.deltaTime;
+        }
+        
     }
 
     void PlaceCells()
@@ -92,7 +106,7 @@ public class Game : MonoBehaviour
                 //NorthWest
                 if(x  - 1 >= 0 && y + 1 < SCREEN_HEIGHT)
                 {
-                    if (grid[x-1,y+1])
+                    if (grid[x-1,y+1].isAlive)
                     {
                         numOfNeighbors++;
                     }
@@ -117,6 +131,38 @@ public class Game : MonoBehaviour
                 }
 
                 grid[x, y].numOfNeighbors = numOfNeighbors;
+            }
+        }
+    }
+
+    void PopulationControl()
+    {
+        for(int y =0; y < SCREEN_HEIGHT; y++)
+        {
+            for (int x = 0; x <SCREEN_WIDTH; x++)
+            {
+                //Rules
+                //Any live cell with 2 or 3 live neighbors survives
+                //Any dead cell with 3 live neighbors becomes a live cell
+                //All other live cells die in the next generation and all other dead cells stay dead
+
+                if (grid[x,y].isAlive)
+                {
+                    // Cell is Alive
+                    if (grid[x,y].numOfNeighbors != 2 && grid[x,y].numOfNeighbors !=3)
+                    {
+                        grid[x, y].SetAlive(false);
+                    }
+                }
+
+                else
+                {
+                    //Cell is Dead
+                    if (grid[x,y].numOfNeighbors == 3)
+                    {
+                        grid[x,y].SetAlive(true);
+                    }
+                }
             }
         }
     }
