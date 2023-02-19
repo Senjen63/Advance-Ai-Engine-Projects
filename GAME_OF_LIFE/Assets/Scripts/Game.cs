@@ -8,6 +8,7 @@ public class Game : MonoBehaviour
     private static int SCREEN_HEIGHT = 48; //768 pixels
     public float speed = 0.1f;
     private float timer = 0;
+    Manager manager;
 
     Cell[,] grid = new Cell[SCREEN_WIDTH, SCREEN_HEIGHT];
 
@@ -21,17 +22,20 @@ public class Game : MonoBehaviour
     
     void Update()
     {
-        if(timer >=speed)
+        if(!manager.isPaused)
         {
-            timer = 0;
+            if (timer >= speed)
+            {
+                timer = 0;
 
-            CountNeighbors();
-            PopulationControl();
-        }
+                CountNeighbors();
+                PopulationControl();
+            }
 
-        else
-        {
-            timer += Time.deltaTime;
+            else
+            {
+                timer += Time.deltaTime;
+            }
         }
         
     }
