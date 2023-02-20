@@ -1,46 +1,61 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Events;
+using UnityEditor;
 
 public class Game : MonoBehaviour
 {
     private static int SCREEN_WIDTH = 64;  //1024 pixels
     private static int SCREEN_HEIGHT = 48; //768 pixels
     public float speed = 0.1f;
-    private float timer = 0;
-    Manager manager;
+    public float timer = 0;
+    public Manager manager;
+    public Button stopButton, stepButton, runButton, drawButton;
 
     Cell[,] grid = new Cell[SCREEN_WIDTH, SCREEN_HEIGHT];
 
     
     void Start()
     {
-        PlaceCells();
+        stopButton.onClick.AddListener(manager.StopGame);
+        stepButton.onClick.AddListener(manager.StepGame);
+        runButton.onClick.AddListener(manager.RunGame);
+        drawButton.onClick.AddListener(manager.DrawGame);
+        manager.isPaused = true;
+        
     }
 
 
     
-    void Update()
+    public void Update()
     {
         if(!manager.isPaused)
         {
             if (timer >= speed)
             {
                 timer = 0;
-
                 CountNeighbors();
                 PopulationControl();
             }
-
             else
             {
                 timer += Time.deltaTime;
             }
         }
-        
+
+        else
+        {
+            Time.timeScale = 0;
+        }
+
+
+        //manager.RunGame();
+
     }
 
-    void PlaceCells()
+    public void PlaceCells()
     {
         for (int y = 0; y < SCREEN_HEIGHT; y++)
         {
@@ -54,7 +69,7 @@ public class Game : MonoBehaviour
         
     }
 
-    void CountNeighbors()
+    public void CountNeighbors()
     {
         for (int y = 0; y < SCREEN_HEIGHT; y++)
         {
@@ -139,7 +154,7 @@ public class Game : MonoBehaviour
         }
     }
 
-    void PopulationControl()
+    public void PopulationControl()
     {
         for(int y =0; y < SCREEN_HEIGHT; y++)
         {
