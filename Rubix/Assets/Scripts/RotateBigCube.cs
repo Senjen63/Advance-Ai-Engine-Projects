@@ -20,8 +20,8 @@ public class RotateBigCube : MonoBehaviour
     
     void Update()
     {
-        Swipe();
-        Drag();
+        //Swipe();
+        //Drag();
     }
 
     void Drag()

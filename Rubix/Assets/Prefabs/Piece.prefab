@@ -143,7 +143,7 @@ Transform:
   - {fileID: 3418278652065242703}
   - {fileID: 5623906149386659251}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6968013643872078761
 MeshFilter:
@@ -229,7 +229,7 @@ GameObject:
   - component: {fileID: 5679473492703042935}
   - component: {fileID: 8980049673241560156}
   m_Layer: 8
-  m_Name: Bottom
+  m_Name: Down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
