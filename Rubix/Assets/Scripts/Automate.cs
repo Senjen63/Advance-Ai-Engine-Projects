@@ -4,12 +4,21 @@ using UnityEngine;
 
 public class Automate : MonoBehaviour
 {
-    public static List<string> moveList = new List<string>() { "U", "U" };
+    public static List<string> moveList = new List<string>() {  };
+
+    private readonly List<string> allMoves = new List<string>() 
+    { "U", "D", "L", "R", "F", "B",
+        "U2", "D2", "L2", "R2", "F2", "B2",
+        "U'", "D'", "L'", "R'", "F'", "B'"        
+    };
+
     private CubeState cubeState;
+    private ReadCube readCube;
 
     void Start()
     {
         cubeState = FindAnyObjectByType<CubeState>();
+        readCube = FindAnyObjectByType<ReadCube>();
     }
 
     // Update is called once per frame
@@ -25,9 +34,24 @@ public class Automate : MonoBehaviour
         }
     }
 
+    public void Shuffle()
+    {
+        List<string> moves = new List<string>();
+        int shuffleLength = Random.Range(10, 30);
+
+        for(int i = 0; i < shuffleLength; i++)
+        {
+            int randomMove = Random.Range(0, allMoves.Count);
+
+            moves.Add(allMoves[randomMove]);
+        }
+        moveList = moves;
+    }
+
     void DoMove(string move)
     {
-        CubeState.autoRotating = false;
+        readCube.ReadState();
+        CubeState.autoRotating = true;
 
         if(move == "U")
         {
@@ -44,9 +68,79 @@ public class Automate : MonoBehaviour
             RotateSide(cubeState.up, -180);
         }
 
-        if (move == "U")
+        if (move == "D")
         {
-            RotateSide(cubeState.up, -90);
+            RotateSide(cubeState.down, -90);
+        }
+
+        if (move == "D'")
+        {
+            RotateSide(cubeState.down, 90);
+        }
+
+        if (move == "D2")
+        {
+            RotateSide(cubeState.down, -180);
+        }
+
+        if (move == "L")
+        {
+            RotateSide(cubeState.left, -90);
+        }
+
+        if (move == "L'")
+        {
+            RotateSide(cubeState.left, 90);
+        }
+
+        if (move == "L2")
+        {
+            RotateSide(cubeState.left, -180);
+        }
+
+        if (move == "R")
+        {
+            RotateSide(cubeState.right, -90);
+        }
+
+        if (move == "R'")
+        {
+            RotateSide(cubeState.right, 90);
+        }
+
+        if (move == "R2")
+        {
+            RotateSide(cubeState.right, -180);
+        }
+
+        if (move == "F")
+        {
+            RotateSide(cubeState.front, -90);
+        }
+
+        if (move == "F'")
+        {
+            RotateSide(cubeState.front, 90);
+        }
+
+        if (move == "F2")
+        {
+            RotateSide(cubeState.front, -180);
+        }
+
+        if (move == "B")
+        {
+            RotateSide(cubeState.back, -90);
+        }
+
+        if (move == "B'")
+        {
+            RotateSide(cubeState.back, 90);
+        }
+
+        if (move == "B2")
+        {
+            RotateSide(cubeState.back, -180);
         }
     }
 

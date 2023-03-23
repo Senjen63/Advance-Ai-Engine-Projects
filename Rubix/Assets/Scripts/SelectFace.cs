@@ -7,16 +7,16 @@ public class SelectFace : MonoBehaviour
     CubeState cubeState;
     ReadCube readCube;
     int layerMask = 1 << 8;
+
     void Start()
     {
         readCube = FindAnyObjectByType<ReadCube>();
         cubeState = FindAnyObjectByType<CubeState>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0) && !CubeState.autoRotating)
         {
             //Read the Current State of the cube
             readCube.ReadState();

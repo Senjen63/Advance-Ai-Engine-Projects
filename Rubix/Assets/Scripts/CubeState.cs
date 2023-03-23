@@ -13,16 +13,6 @@ public class CubeState : MonoBehaviour
     public List<GameObject> right = new List<GameObject>();
     public static bool autoRotating = false;
     public static bool started = false;
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void PickUp(List<GameObject> cubeSide)
     {
@@ -32,14 +22,8 @@ public class CubeState : MonoBehaviour
             if(face != cubeSide[4])
             {
                 face.transform.parent.transform.parent = cubeSide[4].transform.parent;
-
-                
             }
-
-            
         }
-
-        
     }
 
     public void PutDown(List<GameObject> littleCubes, Transform pivot)
@@ -51,5 +35,31 @@ public class CubeState : MonoBehaviour
                 littleCube.transform.parent.transform.parent = pivot;
             }
         }
+    }
+
+    string GetSideString(List<GameObject> side)
+    {
+        string sideString = "";
+
+        foreach(GameObject face in side)
+        {
+            sideString += face.name;
+        }
+
+        return sideString;
+    }
+
+    public string GetStsateString()
+    {
+        string stateString = "";
+
+        stateString += GetSideString(up);
+        stateString += GetSideString(right);
+        stateString += GetSideString(front);
+        stateString += GetSideString(down);
+        stateString += GetSideString(left);
+        stateString += GetSideString(back);
+
+        return stateString;
     }
 }

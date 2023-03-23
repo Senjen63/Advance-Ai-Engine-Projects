@@ -17,7 +17,10 @@ public class ReadCube : MonoBehaviour
     private List<GameObject> downRays = new List<GameObject>();
     private List<GameObject> leftRays = new List<GameObject>();
     private List<GameObject> rightRays = new List<GameObject>();
-    private int layerMask = 1 << 8; //Faces of the cube
+
+    //Faces of the cube
+    private int layerMask = 1 << 8;
+
     CubeState cubeState;
     CubeMap cubeMap;
     public GameObject emptyGO;
@@ -27,16 +30,9 @@ public class ReadCube : MonoBehaviour
         SetRayTransform();
 
         cubeState = FindAnyObjectByType<CubeState>();
-        cubeMap= FindAnyObjectByType<CubeMap>();
+        cubeMap = FindAnyObjectByType<CubeMap>();
         ReadState();
         CubeState.started = true;
-        
-    }
-
-    
-    void Update()
-    {
-        
     }
 
     public void ReadState()
@@ -72,6 +68,7 @@ public class ReadCube : MonoBehaviour
         //The Ray count is used to name the rays so we can be sure they are in the right order
         int rayCount = 0;
         List<GameObject> rays = new List<GameObject>();
+
         //This creates 9 rays in the  shape of the side of the cube with Ray 0 at the top left and ray 8 at the bottom right:
         //|0|1|2|
         //|3|4|5|
@@ -108,15 +105,13 @@ public class ReadCube : MonoBehaviour
             {
                 Debug.DrawRay(ray, rayTransform.forward * hit.distance, Color.yellow);
                 facesHit.Add(hit.collider.gameObject);
-                //print(hit.collider.gameObject);
             }
 
             else
             {
                 Debug.DrawRay(ray, rayTransform.forward * 1000, Color.green);
             }
-        }
-        
+        }        
 
         return facesHit;
     }

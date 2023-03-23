@@ -22,7 +22,6 @@ public class PivotRotation : MonoBehaviour
         cubeState = FindAnyObjectByType<CubeState>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(dragging)
@@ -50,16 +49,14 @@ public class PivotRotation : MonoBehaviour
         //Current mouse position minus the last mouse position
         Vector3 mouseOffset = (Input.mousePosition - mouseRef);
 
-        
-
         if (side == cubeState.up)
         {
-            rotation.y = (mouseOffset.x + mouseOffset.y) * sensitivity * 1;
+            rotation.y = (mouseOffset.x + mouseOffset.y) * sensitivity * -1;
         }
 
         if (side == cubeState.down)
         {
-            rotation.y = (mouseOffset.x + mouseOffset.y) * sensitivity * -1;
+            rotation.y = (mouseOffset.x + mouseOffset.y) * sensitivity * 1;
         }
 
         if (side == cubeState.left)
@@ -103,9 +100,7 @@ public class PivotRotation : MonoBehaviour
     {
         cubeState.PickUp(side);
         Vector3 localForward = Vector3.zero - side[4].transform.parent.transform.localPosition;
-
-        //targetQuaternion = Quaternion.AngleAxis(angle, localForward) * transform.localPosition;
-        //targetQuaternion = Quaternion.AngleAxis(angle, localForward);
+        targetQuaternion = Quaternion.AngleAxis(angle, localForward) * transform.localRotation;
         activeSide = side;
         autoRotating = true;
     }

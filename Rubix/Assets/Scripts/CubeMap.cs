@@ -12,17 +12,6 @@ public class CubeMap : MonoBehaviour
     public Transform right;
     public Transform front;
     public Transform back;
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void Set()
     {
         cubeState = FindAnyObjectByType<CubeState>();
@@ -38,6 +27,7 @@ public class CubeMap : MonoBehaviour
     void UpdateMap(List<GameObject> face, Transform side)
     {
         int i = 0;
+
         foreach(Transform map in side)
         {
             if (face[i].name[0] ==  'F')
