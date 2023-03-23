@@ -35,7 +35,7 @@ public class ReadCube : MonoBehaviour
     
     void Update()
     {
-        ReadState();
+        
     }
 
     public void ReadState()
@@ -107,7 +107,7 @@ public class ReadCube : MonoBehaviour
             {
                 Debug.DrawRay(ray, rayTransform.forward * hit.distance, Color.yellow);
                 facesHit.Add(hit.collider.gameObject);
-                print(hit.collider.gameObject);
+                //print(hit.collider.gameObject);
             }
 
             else
