@@ -22,9 +22,9 @@ public class PivotRotation : MonoBehaviour
         cubeState = FindAnyObjectByType<CubeState>();
     }
 
-    void Update()
+    void LateUpdate()
     {
-        if(dragging)
+        if(dragging && !autoRotating)
         {
             SpinSide(activeSide);
 

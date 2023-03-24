@@ -43,7 +43,7 @@ public class CubeState : MonoBehaviour
 
         foreach(GameObject face in side)
         {
-            sideString += face.name;
+            sideString += face.name[0].ToString();
         }
 
         return sideString;
