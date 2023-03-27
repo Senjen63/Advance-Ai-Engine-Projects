@@ -5,15 +5,21 @@ using UnityEngine;
 public class PivotRotation : MonoBehaviour
 {
     private List<GameObject> activeSide;
+
     private Vector3 localForward;
     private Vector3 mouseRef;
+    private Vector3 rotation;
+
     private bool dragging = false;
     private bool autoRotating = false;
+
     private float sensitivity = 0.4f;
     private float speed = 300f;
-    private Vector3 rotation;
+    
     private Quaternion targetQuaternion;
+
     private ReadCube readCube;
+
     private CubeState cubeState;
 
     void Start()
@@ -49,14 +55,24 @@ public class PivotRotation : MonoBehaviour
         //Current mouse position minus the last mouse position
         Vector3 mouseOffset = (Input.mousePosition - mouseRef);
 
+        if (side == cubeState.front)
+        {
+            rotation.x = (mouseOffset.x + mouseOffset.y) * sensitivity * -1;
+        }
+
+        if (side == cubeState.back)
+        {
+            rotation.x = (mouseOffset.x + mouseOffset.y) * sensitivity * 1;
+        }
+
         if (side == cubeState.up)
         {
-            rotation.y = (mouseOffset.x + mouseOffset.y) * sensitivity * -1;
+            rotation.y = (mouseOffset.x + mouseOffset.y) * sensitivity * 1;
         }
 
         if (side == cubeState.down)
         {
-            rotation.y = (mouseOffset.x + mouseOffset.y) * sensitivity * 1;
+            rotation.y = (mouseOffset.x + mouseOffset.y) * sensitivity * -1;
         }
 
         if (side == cubeState.left)
@@ -69,15 +85,7 @@ public class PivotRotation : MonoBehaviour
             rotation.z = (mouseOffset.x + mouseOffset.y) * sensitivity * -1;
         }
 
-        if (side == cubeState.front)
-        {
-            rotation.x = (mouseOffset.x + mouseOffset.y) * sensitivity * -1;
-        }
-
-        if (side == cubeState.back)
-        {
-            rotation.x = (mouseOffset.x + mouseOffset.y) * sensitivity * 1;
-        }
+        
 
         //Rotate
         transform.Rotate(rotation, Space.Self);
