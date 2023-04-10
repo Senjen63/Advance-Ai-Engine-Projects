@@ -18,6 +18,7 @@ public static class ContentGenerator
             var newPosition = previousPosition + Direction2D.GetRandomCardinalDirection();
         }
 
+        return path;
     }
     
 }
