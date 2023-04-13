@@ -5,7 +5,7 @@ using UnityEngine;
 
 public static class ContentGenerator
 {
-    public static HashSet<Vector2Int> SimpleRandomWalk(Vector2Int startPosition, int walkLength)
+    public static HashSet<Vector2Int> RandomWalk(Vector2Int startPosition, int walkLength)
     {
         HashSet<Vector2Int> path = new HashSet<Vector2Int>();
 
@@ -16,11 +16,12 @@ public static class ContentGenerator
         for(int i = 0; i < walkLength; i++)
         {
             var newPosition = previousPosition + Direction2D.GetRandomCardinalDirection();
+            path.Add(newPosition);
+            previousPosition = newPosition;
         }
 
         return path;
     }
-    
 }
 
 public static class Direction2D
