@@ -16,13 +16,14 @@ public class RandomWalkMap : MonoBehaviour
     public bool isStartrandomlyIterating = true;
 
     [SerializeField]
-    private TileMapVisualizer TileMapVisualizer;
+    private TilemapVisualizer TilemapVisualizer;
 
     public void RunProceduralGeneration()
     {
         HashSet<Vector2Int> floorPositions = RunRadomWalk();
 
-        TileMapVisualizer.PaintFloorTile(floorPositions);
+        TilemapVisualizer.Clear();
+        TilemapVisualizer.PaintFloorTile(floorPositions);
     }
 
     protected HashSet<Vector2Int> RunRadomWalk()

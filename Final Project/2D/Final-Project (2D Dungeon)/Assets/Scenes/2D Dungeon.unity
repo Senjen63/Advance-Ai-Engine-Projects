@@ -290,7 +290,7 @@ MonoBehaviour:
   iterations: 1
   walkLenght: 10
   isStartrandomlyIterating: 1
-  TileMapVisualizer: {fileID: 714553946}
+  TilemapVisualizer: {fileID: 714553946}
 --- !u!4 &229415079
 Transform:
   m_ObjectHideFlags: 0
@@ -342,7 +342,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.376, g: 0.21584614, b: 0.1961739, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -367,7 +367,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -547,8 +547,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 383388bc0cff6b94faee4c998a996b09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floorTileMap: {fileID: 644524877}
-  floorTile: {fileID: 0}
+  floorTilemap: {fileID: 644524877}
+  floorTile: {fileID: 11400000, guid: 471853985ed4b5242ad12af71ace0cf6, type: 2}
 --- !u!4 &714553947
 Transform:
   m_ObjectHideFlags: 0
