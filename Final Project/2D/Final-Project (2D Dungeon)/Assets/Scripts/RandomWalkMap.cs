@@ -4,14 +4,11 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+//referenced tutorial
 public class RandomWalkMap : AbstractDungeon
 {
     [SerializeField]
-    private int iterations = 10;
-    [SerializeField]
-    public int walkLenght = 10;
-    [SerializeField]
-    public bool isStartrandomlyIterating = true;
+    private RandomWalkScriptableObject walkScriptableObject;
 
     protected override void RunProceduralGeneration()
     {
@@ -26,12 +23,12 @@ public class RandomWalkMap : AbstractDungeon
         var currentPosition = startPosition;
         HashSet<Vector2Int> floorPositions = new HashSet<Vector2Int>();
 
-        for(int i = 0; i < iterations; i++)
+        for(int i = 0; i < walkScriptableObject.iterations; i++)
         {
-            var path = ContentGenerator.RandomWalk(currentPosition, walkLenght);
+            var path = ContentGenerator.RandomWalk(currentPosition, walkScriptableObject.walkLength);
             floorPositions.UnionWith(path);
 
-            if(isStartrandomlyIterating)
+            if(walkScriptableObject.StartRandomlyIterating)
             {
                 currentPosition = floorPositions.ElementAt(Random.Range(0, floorPositions.Count));
             }
