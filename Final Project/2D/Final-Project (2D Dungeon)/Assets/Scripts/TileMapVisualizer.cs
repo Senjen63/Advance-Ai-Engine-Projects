@@ -4,14 +4,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-//referenced tutorial
+//Looked at how to video
 public class TilemapVisualizer : MonoBehaviour
 {
     [SerializeField]
     private Tilemap floorTilemap;
 
     [SerializeField]
+    private Tilemap wallTilemap;
+
+    [SerializeField]
     private TileBase floorTile;
+
+    [SerializeField]
+    private TileBase wallTop;
 
     public void PaintFloorTile(IEnumerable<Vector2Int> floorPosition)
     {
@@ -26,6 +32,11 @@ public class TilemapVisualizer : MonoBehaviour
         }
     }
 
+    public void PaintWall(Vector2Int position)
+    {
+        PaintTile(wallTilemap, wallTop, position);
+    }
+
     private void PaintTile(Tilemap tilemap, TileBase tile, Vector2Int position)
     {
         var tilePosition = tilemap.WorldToCell((Vector3Int)position);
@@ -36,5 +47,6 @@ public class TilemapVisualizer : MonoBehaviour
     public void Clear()
     {
         floorTilemap.ClearAllTiles();
+        wallTilemap.ClearAllTiles();
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//referenced tutorial
+//Looked at how to video
 public static class DungeonWallGenerator
 {
     public static void Create(HashSet<Vector2Int> positions, TilemapVisualizer tilemapVisualizer)
@@ -11,7 +11,7 @@ public static class DungeonWallGenerator
 
         foreach(var position in positionsOfBasicWalls)
         {
-
+            tilemapVisualizer.PaintWall(position);
         }
     }
 

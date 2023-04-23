@@ -4,7 +4,8 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-//referenced tutorial
+//Looked at how to video
+
 public class RandomWalkMap : AbstractDungeon
 {
     [SerializeField]
@@ -12,13 +13,14 @@ public class RandomWalkMap : AbstractDungeon
 
     protected override void RunProceduralGeneration()
     {
-        HashSet<Vector2Int> floorPositions = RunRadomWalk();
+        HashSet<Vector2Int> floorPositions = RunRadomWalk(walkScriptableObject);
 
         tilemapVisualizer.Clear();
         tilemapVisualizer.PaintFloorTile(floorPositions);
+        DungeonWallGenerator.Create(floorPositions, tilemapVisualizer);
     }
 
-    protected HashSet<Vector2Int> RunRadomWalk()
+    protected HashSet<Vector2Int> RunRadomWalk(RandomWalkScriptableObject parameters)
     {
         var currentPosition = startPosition;
         HashSet<Vector2Int> floorPositions = new HashSet<Vector2Int>();

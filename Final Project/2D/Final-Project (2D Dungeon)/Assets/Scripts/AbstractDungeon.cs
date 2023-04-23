@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//referenced tutorial
+//Looked at how to video
 public abstract class AbstractDungeon : MonoBehaviour
 {
     [SerializeField]

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-//referenced tutorial
+//Looked at how to video
+
 [CustomEditor(typeof(AbstractDungeon), true)]
 public class DungeonEditor : Editor
 {

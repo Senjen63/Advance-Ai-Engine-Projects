@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//referenced tutorial
+//Looked at how to video
+
 [CreateAssetMenu(fileName = "RandomWalkParameters", menuName = "Procedural Content Generator/RandomWalkScriptableObject")]
 public class RandomWalkScriptableObject : ScriptableObject
 {

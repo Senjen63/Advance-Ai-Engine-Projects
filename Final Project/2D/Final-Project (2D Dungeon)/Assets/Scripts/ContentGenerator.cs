@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
+//Looked at how to video
+
 public static class ContentGenerator
 {
     public static HashSet<Vector2Int> RandomWalk(Vector2Int startPosition, int walkLength)
@@ -21,6 +23,25 @@ public static class ContentGenerator
         }
 
         return path;
+    }
+
+    public static List<Vector2Int> RandomCorridor(Vector2Int startPosition, int corridorLength)
+    {
+        List<Vector2Int> corridor = new List<Vector2Int>();
+
+        var direction = Direction2D.GetRandomCardinalDirection();
+        var currentPosition = startPosition;
+
+        corridor.Add(currentPosition);
+
+        for(int i = 0; i < corridorLength; i++)
+        {
+            currentPosition += direction;
+
+            corridor.Add(currentPosition);
+        }
+
+        return corridor;
     }
 }
 
