@@ -43,6 +43,71 @@ public static class ContentGenerator
 
         return corridor;
     }
+
+    public static List<BoundsInt> BinarySpacePartitioning(BoundsInt spaceToSplit, int miniumWidth, int miniumHeight)
+    {
+        Queue<BoundsInt> roomQueued = new Queue<BoundsInt>();
+        List<BoundsInt> listOfRooms = new List<BoundsInt>();
+
+        roomQueued.Enqueue(spaceToSplit);
+
+        while(roomQueued.Count > 0)
+        {
+            var room = roomQueued.Dequeue();
+
+            if(room.size.x >= miniumWidth && room.size.y >= miniumHeight)
+            {
+                if(Random.value < 0.5f)
+                {
+                    if(room.size.x >= miniumWidth * 2)
+                    {
+                        SplitRoomVertically(miniumWidth, miniumHeight, roomQueued, room);
+                    }
+
+                    else if(room.size.y >= miniumHeight * 2)
+                    {
+                        SplitRoomHorizontally(miniumWidth, miniumHeight, roomQueued, room);
+                    }
+
+                    else if(room.size.x >= miniumWidth * 2 && room.size.y >= miniumHeight * 2)
+                    {
+                        listOfRooms.Add(room);
+                    }
+                }
+            }
+
+            else
+            {
+                if (room.size.y >= miniumHeight * 2)
+                {
+                    SplitRoomHorizontally(miniumWidth, miniumHeight, roomQueued, room);
+                }
+
+                else if (room.size.x >= miniumWidth * 2)
+                {
+                    SplitRoomVertically(miniumWidth, miniumHeight, roomQueued, room);
+                }
+                             
+
+                else if (room.size.x >= miniumWidth * 2 && room.size.y >= miniumHeight * 2)
+                {
+                    listOfRooms.Add(room);
+                }
+            }
+        }
+
+        return listOfRooms;
+    }
+
+    public static void SplitRoomHorizontally(int miniumWidth, int miniumHeight, Queue<BoundsInt> roomsQueue, BoundsInt room)
+    {
+
+    }
+
+    public static void SplitRoomVertically(int miniumWidth, int miniumHeight, Queue<BoundsInt> roomsQueue, BoundsInt room)
+    {
+
+    }
 }
 
 public static class Direction2D
