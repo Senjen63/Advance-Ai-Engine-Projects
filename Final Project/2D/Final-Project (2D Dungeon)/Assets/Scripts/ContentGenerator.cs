@@ -61,12 +61,12 @@ public static class ContentGenerator
                 {
                     if(room.size.x >= miniumWidth * 2)
                     {
-                        SplitRoomVertically(miniumWidth, miniumHeight, roomQueued, room);
+                        SplitRoomVertically(miniumWidth, roomQueued, room);
                     }
 
                     else if(room.size.y >= miniumHeight * 2)
                     {
-                        SplitRoomHorizontally(miniumWidth, miniumHeight, roomQueued, room);
+                        SplitRoomHorizontally(miniumHeight, roomQueued, room);
                     }
 
                     else if(room.size.x >= miniumWidth * 2 && room.size.y >= miniumHeight * 2)
@@ -80,12 +80,12 @@ public static class ContentGenerator
             {
                 if (room.size.y >= miniumHeight * 2)
                 {
-                    SplitRoomHorizontally(miniumWidth, miniumHeight, roomQueued, room);
+                    SplitRoomHorizontally(miniumHeight, roomQueued, room);
                 }
 
                 else if (room.size.x >= miniumWidth * 2)
                 {
-                    SplitRoomVertically(miniumWidth, miniumHeight, roomQueued, room);
+                    SplitRoomVertically(miniumWidth, roomQueued, room);
                 }
                              
 
@@ -99,14 +99,26 @@ public static class ContentGenerator
         return listOfRooms;
     }
 
-    public static void SplitRoomHorizontally(int miniumWidth, int miniumHeight, Queue<BoundsInt> roomsQueue, BoundsInt room)
+    public static void SplitRoomHorizontally(int miniumHeight, Queue<BoundsInt> roomsQueue, BoundsInt room)
     {
+        var splitY = Random.Range(1, room.size.y);
 
+        BoundsInt room1 = new BoundsInt(room.min, new Vector3Int(room.size.x, splitY, room.size.z));
+        BoundsInt room2 = new BoundsInt(new Vector3Int(room.min.x, room.min.y + splitY, room.size.z), new Vector3Int(room.size.x, room.size.y - splitY, room.size.z));
+
+        roomsQueue.Enqueue(room1);
+        roomsQueue.Enqueue(room2);
     }
 
-    public static void SplitRoomVertically(int miniumWidth, int miniumHeight, Queue<BoundsInt> roomsQueue, BoundsInt room)
+    public static void SplitRoomVertically(int miniumWidth, Queue<BoundsInt> roomsQueue, BoundsInt room)
     {
+        var splitX = Random.Range(1, room.size.x);
 
+        BoundsInt room1 = new BoundsInt(room.min, new Vector3Int(splitX, room.min.y, room.min.z));
+        BoundsInt room2 = new BoundsInt(new Vector3Int(room.min.x + splitX, room.min.y, room.min.z), new Vector3Int(room.size.x - splitX, room.size.y, room.size.z));
+
+        roomsQueue.Enqueue(room1);
+        roomsQueue.Enqueue(room2);
     }
 }
 
