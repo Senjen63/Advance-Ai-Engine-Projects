@@ -32,11 +32,53 @@ public class CorridorDungeonGenerator : RandomWalkMap
 
         HashSet<Vector2Int> roomPositions = CreateRooms(potentialRoomPositions);
 
+        List<Vector2Int> DeadEnd = FindAllDeadEnds(floorPositions);
+
+        CreateRoomAtDeadEnd(DeadEnd, roomPositions);
+
         floorPositions.UnionWith(roomPositions);
 
         tilemapVisualizer.PaintFloorTile(floorPositions);
 
         DungeonWallGenerator.Create(floorPositions, tilemapVisualizer);
+    }
+
+    private void CreateRoomAtDeadEnd(List<Vector2Int> DeadEnd, HashSet<Vector2Int> roomFloors)
+    {
+        foreach(var position in DeadEnd)
+        {
+            if(roomFloors.Contains(position) == false)
+            {
+                var room = RunRadomWalk(walkScriptableObject, position);
+
+                roomFloors.UnionWith(room);
+            }
+        }
+    }
+
+    private List<Vector2Int> FindAllDeadEnds(HashSet<Vector2Int> floorPositions)
+    {
+        List<Vector2Int> DeadEnds = new List<Vector2Int>();
+
+        foreach(var position in floorPositions)
+        {
+            int neighborCount = 0;
+
+            foreach(var direction in Direction2D.cardinalDirectionList)
+            {
+                if(floorPositions.Contains(position + direction))
+                {
+                    neighborCount++;
+                }
+            }
+
+            if (neighborCount == 1)
+            {
+                DeadEnds.Add(position);
+            }
+        }
+
+        return DeadEnds;
     }
 
     private HashSet<Vector2Int> CreateRooms(HashSet<Vector2Int> potentialRoomPositions)
