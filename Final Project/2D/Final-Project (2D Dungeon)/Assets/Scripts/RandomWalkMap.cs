@@ -9,20 +9,20 @@ using Random = UnityEngine.Random;
 public class RandomWalkMap : AbstractDungeon
 {
     [SerializeField]
-    private RandomWalkScriptableObject walkScriptableObject;
+    protected RandomWalkScriptableObject walkScriptableObject;
 
     protected override void RunProceduralGeneration()
     {
-        HashSet<Vector2Int> floorPositions = RunRadomWalk(walkScriptableObject);
+        HashSet<Vector2Int> floorPositions = RunRadomWalk(walkScriptableObject, startPosition);
 
         tilemapVisualizer.Clear();
         tilemapVisualizer.PaintFloorTile(floorPositions);
         DungeonWallGenerator.Create(floorPositions, tilemapVisualizer);
     }
 
-    protected HashSet<Vector2Int> RunRadomWalk(RandomWalkScriptableObject parameters)
+    protected HashSet<Vector2Int> RunRadomWalk(RandomWalkScriptableObject parameters, Vector2Int position)
     {
-        var currentPosition = startPosition;
+        var currentPosition = position;
         HashSet<Vector2Int> floorPositions = new HashSet<Vector2Int>();
 
         for(int i = 0; i < walkScriptableObject.iterations; i++)
