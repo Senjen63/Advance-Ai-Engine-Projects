@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 //Looked at how to video
 
@@ -17,6 +18,10 @@ public class CorridorDungeonGenerator : RandomWalkMap
     [SerializeField]
     [Range(0.1f, 1)]
     private float roomPercent = 0.8f;
+
+    public Text length;
+    public Text count;
+    public Text room;
 
     protected override void RunProceduralGeneration()
     {
@@ -205,5 +210,62 @@ public class CorridorDungeonGenerator : RandomWalkMap
         }
 
         return Vector2Int.zero;
+    }
+
+    public void IncreaseCorridorLength()
+    {
+        corridorLength++;
+    }
+
+    public void DecreaseCorridorLength()
+    {
+        corridorLength--;
+
+        if (corridorLength <= 0)
+        {
+            corridorLength = 0;
+        }
+    }
+
+    public void IncreaseCorridorCount()
+    {
+        corridorCount++;
+    }
+
+    public void DecreaseCorridorCount()
+    {
+        corridorCount--;
+
+        if (corridorCount <= 0)
+        {
+            corridorCount = 0;
+        }
+    }
+
+    public void IncreaseRoomPercent()
+    {
+        roomPercent += 0.1f;
+
+        if(roomPercent >= 1)
+        {
+            roomPercent = 1;
+        }
+    }
+
+    public void DecreaseRoomPercent()
+    {
+        roomPercent -= 0.1f;
+
+        if (roomPercent <= 0)
+        {
+            roomPercent = 0;
+        }
+    }
+
+    public void Update()
+    {
+        length.text = "Corridor Length: " + corridorLength.ToString();
+        count.text = "Corridor Count: " + corridorCount.ToString();
+        room.text = "Room Percent: " + roomPercent.ToString();
     }
 }

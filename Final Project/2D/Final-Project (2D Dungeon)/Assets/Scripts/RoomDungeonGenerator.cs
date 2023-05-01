@@ -1,6 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
+
+
+//Looked at how to video
 
 public class RoomDungeonGenerator : RandomWalkMap
 {
@@ -22,6 +27,13 @@ public class RoomDungeonGenerator : RandomWalkMap
 
     [SerializeField]
     private bool randomWalkRooms = false;
+
+    public Text widthR;
+    public Text heightR;
+    public Text widthD;
+    public Text heightD;
+    public Text set;
+    public Text WalkRoom;
 
     protected override void RunProceduralGeneration()
     {
@@ -189,5 +201,112 @@ public class RoomDungeonGenerator : RandomWalkMap
         return floor;
     }
 
+    public void IncreaseMinRoomWidth()
+    {
+        minRoomWidth++;
+    }
 
+    public void DecreaseMinRoomWidth()
+    {
+        minRoomWidth--;
+
+        if (minRoomWidth <= 0)
+        {
+            minRoomWidth = 0;
+        }
+    }
+
+    public void IncreaseMinRoomHeight()
+    {
+        minRoomHeight++;
+    }
+
+    public void DecreaseMinRoomHeight()
+    {
+        minRoomHeight--;
+
+        if (minRoomHeight <= 0)
+        {
+            minRoomHeight = 0;
+        }
+    }
+
+    public void IncreaseDungeonWidth()
+    {
+        dungeonWidth++;
+    }
+
+    public void DecreaseDungeonWidth()
+    {
+        dungeonWidth--;
+
+        if (dungeonWidth <= 0)
+        {
+            dungeonWidth = 0;
+        }
+    }
+
+    public void IncreaseDungeonHeight()
+    {
+        dungeonHeight++;
+    }
+
+    public void DecreaseDungeonHeight()
+    {
+        dungeonHeight--;
+
+        if (dungeonHeight <= 0)
+        {
+            dungeonHeight = 0;
+        }
+    }
+
+    public void IncreaseOffset()
+    {
+        offset++;
+
+        if(offset >= 10)
+        {
+            offset = 10;
+        }
+    }
+
+    public void DecreaseOffset()
+    {
+        offset--;
+
+        if(offset <= 0)
+        {
+            offset = 0;
+        }
+    }
+
+    public void RandomWalkRoomsOn()
+    {
+        randomWalkRooms = true;
+    }
+
+    public void RandomWalkRoomsOff()
+    {
+        randomWalkRooms = false;
+    }
+
+    public void Update()
+    {
+        widthR.text = "Min Room Width: " + minRoomWidth.ToString();
+        heightR.text = "Min Room Height: " + minRoomHeight.ToString();
+        widthD.text = "Dungeon Width: " + dungeonWidth.ToString();
+        heightD.text = "Dungeon Height: " + dungeonHeight.ToString();
+        set.text = "Offset: " + offset.ToString();
+
+        if(randomWalkRooms)
+        {
+            WalkRoom.text = "Random Walk Rooms: On";
+        }
+
+        else
+        {
+            WalkRoom.text = "Random Walk Rooms: Off";
+        }
+    }
 }

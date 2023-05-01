@@ -9,9 +9,60 @@ public static class DungeonWallGenerator
     {
         var positionsOfBasicWalls = FindWalls(floorPositions, Direction2D.cardinalDirectionList);
 
-        foreach(var position in positionsOfBasicWalls)
+        var cornersOfWalls = FindWalls(floorPositions, Direction2D.diagonalDirectionList);
+
+        CreateBasic(tilemapVisualizer, positionsOfBasicWalls, floorPositions);
+
+        CreateCorner(tilemapVisualizer, positionsOfBasicWalls, floorPositions);
+    }
+
+    private static void CreateBasic(TilemapVisualizer tilemapVisualizer, HashSet<Vector2Int> positionsOfBasicWalls, HashSet<Vector2Int> floorPositions)
+    {
+        foreach (var position in positionsOfBasicWalls)
         {
-            tilemapVisualizer.PaintWall(position);
+            string neighborsBinary = "";
+
+            foreach (var direction in Direction2D.cardinalDirectionList)
+            {
+                var neighborPosition = position + direction;
+
+                if(floorPositions.Contains(neighborPosition))
+                {
+                    neighborsBinary += "1";
+                }
+
+                else
+                {
+                    neighborsBinary += "0";
+                }
+            }
+
+            tilemapVisualizer.PaintWall(position, neighborsBinary);
+        }
+    }
+
+    private static void CreateCorner(TilemapVisualizer tilemapVisualizer, HashSet<Vector2Int> cornersOfWalls, HashSet<Vector2Int> floorPositions)
+    {
+        foreach(var position in cornersOfWalls)
+        {
+            string neighborsBinary = "";
+
+            foreach(var direction in Direction2D.eightDirectionsList)
+            {
+                var neighborPosition = position + direction;
+
+                if(floorPositions.Contains(neighborPosition))
+                {
+                    neighborsBinary += "1";
+                }
+
+                else
+                {
+                    neighborsBinary += "0";
+                }
+            }
+
+            tilemapVisualizer.PaintCornerWall(position, neighborsBinary);
         }
     }
 
